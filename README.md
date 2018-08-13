@@ -1,7 +1,7 @@
 # aws-mqtt-websocket-wifimanager-mh-z19
 ESP32 arduino MH-z19 CO2 sensor data to AWS IoT using MQTT over Websocket
 
-Platform IDE for Visual Studio Codeでの開発用のArduinoプログラム。
+Platform IDE for Visual Studio Codeでの開発用の ESP32 Arduinoプログラム。
 
 MH-ET Live ESP32 Minikit (ESP-WROOM-32)を用いて CO2センサーである MH-z19 のデータを AWS IoT に MQTT over Websocket で送るプログラム。
 
@@ -17,10 +17,10 @@ aws-mqtt-websocket.cpp 中の次のインクルードファイルはこのリポ
 
 AWS IoTと通信するために以下のマクロを定義する必要がある。
 
+* MY_AWS_REGION
 * MY_AWS_ENDPOINT
 * MY_AWS_IAM_KEY
 * MY_AWS_IAM_SECRET_KEY
-* MY_AWS_REGION
 
 # ファイル
 各ファイルの主な役割は以下の通り。
