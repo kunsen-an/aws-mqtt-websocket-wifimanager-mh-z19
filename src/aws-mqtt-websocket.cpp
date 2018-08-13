@@ -14,6 +14,8 @@
 #include <ArduinoLog.h>
 #include <ArduinoJson.h>
 
+#define MAX_JSON_SIZE 512
+
 #define DEBUG_ECHO 1
 
 //WEBSockets
@@ -294,7 +296,12 @@ void setupMQTT()
   {
     Log.notice("connect success=%d\n", success);
     subscribe();
-    publishMessage("{\"Start\": \"on\"}");
+
+    // send startup message
+    StaticJsonBuffer<MAX_JSON_SIZE> jsonBuffer;
+    JsonObject &jsonObject = jsonBuffer.createObject();
+    jsonObject["Start"] = "on";
+    publishJson(jsonObject);
   }
   else
   {
@@ -346,7 +353,11 @@ int loopMQTT()
       Log.warning("Reconnected. mqttClient.connect()=>%d awsWSclient.connected()=%d\n", mqttClient.isConnected(), awsWSclient.connected());
 #endif
       subscribe();
-      publishMessage("{\"Status\": \"Reconnected\"}");
+      // send reconnect message
+      StaticJsonBuffer<MAX_JSON_SIZE> jsonBuffer;
+      JsonObject &jsonObject = jsonBuffer.createObject();
+      jsonObject["Status"] = "reconnected";
+      publishJson(jsonObject);
     }
     else
     {
