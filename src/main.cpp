@@ -119,6 +119,8 @@ void setup()
 
 #ifdef USE_HARD_RESET
   setupHardReset();
+#else
+  setResetFunc(softReset);
 #endif  // USE_HARD_RESET
   setupOLED(2);
 

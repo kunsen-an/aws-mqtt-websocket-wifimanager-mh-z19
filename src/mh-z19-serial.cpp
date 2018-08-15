@@ -31,11 +31,8 @@ SoftwareSerial co2Serial(MH_Z19_TX, MH_Z19_RX); // define MH-Z19 (receiving pin,
 
 extern void setupDeviceName(char deviceNameBuffer[], const char* deviceName);
 
-void(* resetFunc) (void) = 0; //declare reset function @ address 0
-
-void setResetFunc(void(* func) (void)) {
-  resetFunc = func;
-}
+extern void setResetFunc(void(* func) (void));
+extern void callResetFunc();
 
 byte checkSum(byte data[]) {
   byte value = 0;
@@ -132,9 +129,8 @@ int updateMHZ19(JsonObject& jsonObject)
   {
     Log.error("MH-z19 Too many errors. call reset function\n");
     delay(RESET_DELAY);
-    if ( resetFunc ) {
-      resetFunc();
-    }
+    // call reset function
+    callResetFunc();
   }
 
   int ppm = readCO2();

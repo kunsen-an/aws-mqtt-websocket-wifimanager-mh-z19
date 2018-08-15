@@ -37,13 +37,7 @@ char *getTimestamp()
 
   time_t t = time(NULL);
   struct tm *tm = localtime(&t);
-
-#ifdef ESP8266
-  int timediff = sntp_get_timezone();
-#endif // ESP8266
-#ifdef ESP32
   int timediff = TIMEDIFF;
-#endif // ESP32
 
   sprintf(timestampString, "%04d-%02d-%02dT%02d:%02d:%02d+%02d:00", 
     tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, 
