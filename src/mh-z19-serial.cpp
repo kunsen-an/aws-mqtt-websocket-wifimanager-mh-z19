@@ -13,7 +13,7 @@
 #define MH_Z19_TX   D4  // data receiving pin
 
 HardwareSerial co2Serial(1); 
-#else // WeMos D1 mini
+#elif defined(ARDUINO_ESP8266_WEMOS_D1MINI) // WeMos D1 mini
 #define D3  0
 #define D4  2
 
