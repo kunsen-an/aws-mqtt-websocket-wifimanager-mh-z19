@@ -45,7 +45,7 @@ void clearOLED()
   oled.setCursor(0, 0); // Set the text cursor to the upper-left of the screen.
 }
 
-void displayOLED(char *format, ...)
+void displayOLED(const char *format, ...)
 {
   char buf[MAX_OLED_MESSAGE_SIZE];
 

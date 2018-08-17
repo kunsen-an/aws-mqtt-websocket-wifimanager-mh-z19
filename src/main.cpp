@@ -22,17 +22,15 @@ void nothing(...)
 {
 }
 
+int nothingJson(JsonObject &jsonObject)
+{
+}
+
 #define publishMessage(arg) nothing(arg)
-#define publisJson(arg) nothing(arg)
+#define publishJson(arg) nothingJson(arg)
+#define setupWiFi() nothing()
+#define setupMQTT() nothing()
 #endif
-
-#ifdef USE_HARD_RESET
-// wiring is required to use hardReset()
-extern void hardReset();
-#endif // USE_HARD_RESET
-extern void setupHardReset();
-
-extern void stopWiFi();
 
 #ifndef STOP_WIFI
 extern void setupWiFi();
@@ -42,11 +40,19 @@ extern int loopMQTT();
 extern int publishJson(JsonObject &jsonObject);
 #endif // STOP_WIFI
 
+#ifdef USE_HARD_RESET
+// wiring is required to use hardReset()
+extern void hardReset();
+#endif // USE_HARD_RESET
+extern void setupHardReset();
+
+extern void stopWiFi();
+
 extern void setupMHZ19(char deviceNameBuffer[]);
 extern int updateMHZ19(JsonObject &jsonObject);
 
 extern void setupOLED(int size);
-extern void displayOLED(char *format, ...);
+extern void displayOLED(const char *format, ...);
 
 extern void setEventHandler(void (*handler)(JsonObject &objec));
 extern void setResetFunc(void (*func)(void));

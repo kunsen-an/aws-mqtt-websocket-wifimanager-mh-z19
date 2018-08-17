@@ -53,7 +53,11 @@ char *getMacAddress()
 
 void configModeCallback(WiFiManager *myWiFiManager)
 {
-  Log.notice("configModeCallback():%s%s:\n", WiFi.softAPIP(), myWiFiManager->getConfigPortalSSID());
+#ifdef ESP8266
+  Log.notice("configModeCallback():%s,%s:\n", WiFi.softAPIP().toString().c_str(), myWiFiManager->getConfigPortalSSID().c_str());
+#else
+  Log.notice("configModeCallback():%s,%s:\n", WiFi.softAPIP(), myWiFiManager->getConfigPortalSSID());
+#endif
 }
 
 void setupWiFi()
